@@ -1,0 +1,44 @@
+
+    <html>
+    <head>
+        <title>Backtest Report - 4h</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+            h1 { color: #333; }
+            h2 { color: #555; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+            th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+            th { background-color: #4CAF50; color: white; }
+            tr:nth-child(even) { background-color: #f2f2f2; }
+            .summary { margin-top: 20px; padding: 15px; background-color: #e8f5e9; border-radius: 5px; }
+            .trade-details { margin-top: 20px; }
+            .buy { color: green; font-weight: bold; }
+            .sell { color: red; font-weight: bold; }
+        </style>
+    </head>
+    <body>
+        <h1>Backtest Report - 4h</h1>
+        <div class="summary">
+            <h2>Summary</h2>
+            <table>
+                <tr><th>Metric</th><th>Value</th></tr>
+                <tr><td>Initial Capital</td><td>10000.00 USDT</td></tr>
+                <tr><td>Final Portfolio Value</td><td>11125.31 USDT</td></tr>
+                <tr><td>Total Return</td><td>11.25%</td></tr>
+                <tr><td>Sharpe Ratio (Annualized)</td><td>0.92</td></tr>
+                <tr><td>Max Drawdown</td><td>5.32%</td></tr>
+                <tr><td>Total Trades</td><td>21 (Buys: 11, Sells: 10)</td></tr>
+                <tr><td>Win Rate</td><td>50.00%</td></tr>
+                <tr><td>Total Transaction Fees</td><td>136.14 USDT</td></tr>
+            </table>
+        </div>
+        <div class="trade-details">
+            <h2>Trade Details</h2>
+            <table>
+                <tr><th>Trade #</th><th>Type</th><th>Timestamp</th><th>Price (USDT)</th><th>Amount (BTC)</th><th>Fee (USDT)</th><th>Portfolio Value (USDT)</th><th>Reason</th></tr>
+                <tr><td>1</td><td><span class='buy'>BUY</span></td><td>2023-06-06 08:00:00</td><td>25685.28</td><td>0.291770</td><td>5.81</td><td>10000.00</td><td>signal</td></tr><tr><td>2</td><td><span class='sell'>SELL</span></td><td>2023-06-06 16:00:00</td><td>27073.58</td><td>0.291770</td><td>6.12</td><td>10399.25</td><td>take-profit</td></tr><tr><td>3</td><td><span class='buy'>BUY</span></td><td>2023-06-15 12:00:00</td><td>24962.84</td><td>0.312016</td><td>6.04</td><td>10393.13</td><td>signal</td></tr><tr><td>4</td><td><span class='sell'>SELL</span></td><td>2023-06-16 16:00:00</td><td>26381.99</td><td>0.312016</td><td>6.38</td><td>10829.89</td><td>take-profit</td></tr><tr><td>5</td><td><span class='buy'>BUY</span></td><td>2023-06-20 12:00:00</td><td>27073.80</td><td>0.299601</td><td>6.29</td><td>10823.51</td><td>signal</td></tr><tr><td>6</td><td><span class='sell'>SELL</span></td><td>2023-06-21 04:00:00</td><td>28875.59</td><td>0.299601</td><td>6.70</td><td>11357.03</td><td>take-profit</td></tr><tr><td>7</td><td><span class='buy'>BUY</span></td><td>2023-06-21 12:00:00</td><td>29852.41</td><td>0.284940</td><td>6.59</td><td>11350.33</td><td>signal</td></tr><tr><td>8</td><td><span class='sell'>SELL</span></td><td>2023-06-26 00:00:00</td><td>30296.02</td><td>0.284940</td><td>6.69</td><td>11470.13</td><td>trailing-stop</td></tr><tr><td>9</td><td><span class='buy'>BUY</span></td><td>2023-07-03 08:00:00</td><td>30626.08</td><td>0.280510</td><td>6.66</td><td>11463.44</td><td>signal</td></tr><tr><td>10</td><td><span class='sell'>SELL</span></td><td>2023-07-06 16:00:00</td><td>30311.85</td><td>0.280510</td><td>6.59</td><td>11368.64</td><td>trailing-stop</td></tr><tr><td>11</td><td><span class='buy'>BUY</span></td><td>2023-07-13 08:00:00</td><td>30543.00</td><td>0.278785</td><td>6.60</td><td>11362.05</td><td>signal</td></tr><tr><td>12</td><td><span class='sell'>SELL</span></td><td>2023-07-14 16:00:00</td><td>30116.00</td><td>0.278785</td><td>6.51</td><td>11236.40</td><td>trailing-stop</td></tr><tr><td>13</td><td><span class='buy'>BUY</span></td><td>2023-08-01 12:00:00</td><td>28952.00</td><td>0.290684</td><td>6.52</td><td>11229.89</td><td>signal</td></tr><tr><td>14</td><td><span class='sell'>SELL</span></td><td>2023-08-01 20:00:00</td><td>29706.00</td><td>0.290684</td><td>6.69</td><td>11442.54</td><td>take-profit</td></tr><tr><td>15</td><td><span class='buy'>BUY</span></td><td>2023-08-08 12:00:00</td><td>29537.82</td><td>0.290145</td><td>6.64</td><td>11435.85</td><td>signal</td></tr><tr><td>16</td><td><span class='sell'>SELL</span></td><td>2023-08-13 04:00:00</td><td>29402.01</td><td>0.290145</td><td>6.61</td><td>11389.80</td><td>stop-loss</td></tr><tr><td>17</td><td><span class='buy'>BUY</span></td><td>2023-08-18 16:00:00</td><td>26063.98</td><td>0.327301</td><td>6.61</td><td>11383.19</td><td>signal</td></tr><tr><td>18</td><td><span class='sell'>SELL</span></td><td>2023-08-22 16:00:00</td><td>25779.99</td><td>0.327301</td><td>6.54</td><td>11283.62</td><td>stop-loss</td></tr><tr><td>19</td><td><span class='buy'>BUY</span></td><td>2023-08-23 12:00:00</td><td>26146.00</td><td>0.323233</td><td>6.55</td><td>11277.08</td><td>signal</td></tr><tr><td>20</td><td><span class='sell'>SELL</span></td><td>2023-08-28 04:00:00</td><td>25932.02</td><td>0.323233</td><td>6.50</td><td>11201.36</td><td>stop-loss</td></tr><tr><td>21</td><td><span class='buy'>BUY</span></td><td>2023-08-29 12:00:00</td><td>27421.97</td><td>0.305946</td><td>6.50</td><td>11194.86</td><td>signal</td></tr>
+            </table>
+        </div>
+    </body>
+    </html>
+    

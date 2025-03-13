@@ -1,0 +1,28 @@
+# Python-specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+
+# Environment variables and sensitive files
+.env
+*.key
+*.secret
+
+# Temporary files and logs
+*.log
+*.tmp
+*.bak
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore large data files or ML models if not needed
+*.csv
+*.json
+*.model
+xgboost_model.json

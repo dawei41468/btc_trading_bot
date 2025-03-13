@@ -1,0 +1,44 @@
+
+    <html>
+    <head>
+        <title>Backtest Report - 4h</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+            h1 { color: #333; }
+            h2 { color: #555; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+            th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+            th { background-color: #4CAF50; color: white; }
+            tr:nth-child(even) { background-color: #f2f2f2; }
+            .summary { margin-top: 20px; padding: 15px; background-color: #e8f5e9; border-radius: 5px; }
+            .trade-details { margin-top: 20px; }
+            .buy { color: green; font-weight: bold; }
+            .sell { color: red; font-weight: bold; }
+        </style>
+    </head>
+    <body>
+        <h1>Backtest Report - 4h</h1>
+        <div class="summary">
+            <h2>Summary</h2>
+            <table>
+                <tr><th>Metric</th><th>Value</th></tr>
+                <tr><td>Initial Capital</td><td>10000.00 USDT</td></tr>
+                <tr><td>Final Portfolio Value</td><td>9818.87 USDT</td></tr>
+                <tr><td>Total Return</td><td>-1.81%</td></tr>
+                <tr><td>Sharpe Ratio (Annualized)</td><td>-0.02</td></tr>
+                <tr><td>Max Drawdown</td><td>18.66%</td></tr>
+                <tr><td>Total Trades</td><td>14 (Buys: 7, Sells: 7)</td></tr>
+                <tr><td>Win Rate</td><td>42.86%</td></tr>
+                <tr><td>Total Transaction Fees</td><td>77.75 USDT</td></tr>
+            </table>
+        </div>
+        <div class="trade-details">
+            <h2>Trade Details</h2>
+            <table>
+                <tr><th>Trade #</th><th>Type</th><th>Timestamp</th><th>Price (USDT)</th><th>Amount (BTC)</th><th>Fee (USDT)</th><th>Portfolio Value (USDT)</th><th>Reason</th></tr>
+                <tr><td>1</td><td><span class='buy'>BUY</span></td><td>2024-09-06 12:00:00</td><td>54041.46</td><td>0.138675</td><td>5.81</td><td>10000.00</td><td>signal</td></tr><tr><td>2</td><td><span class='sell'>SELL</span></td><td>2024-09-09 16:00:00</td><td>57095.87</td><td>0.138675</td><td>6.14</td><td>10417.76</td><td>take-profit</td></tr><tr><td>3</td><td><span class='buy'>BUY</span></td><td>2024-09-15 12:00:00</td><td>65900.89</td><td>0.118400</td><td>6.05</td><td>10411.62</td><td>signal</td></tr><tr><td>4</td><td><span class='sell'>SELL</span></td><td>2024-09-15 16:00:00</td><td>56004.92</td><td>0.118400</td><td>5.14</td><td>9233.89</td><td>trailing-stop</td></tr><tr><td>5</td><td><span class='buy'>BUY</span></td><td>2024-09-16 08:00:00</td><td>58798.68</td><td>0.117625</td><td>5.36</td><td>9228.75</td><td>signal</td></tr><tr><td>6</td><td><span class='sell'>SELL</span></td><td>2024-09-16 12:00:00</td><td>54137.97</td><td>0.117625</td><td>4.94</td><td>8675.17</td><td>trailing-stop</td></tr><tr><td>7</td><td><span class='buy'>BUY</span></td><td>2024-09-16 20:00:00</td><td>54779.07</td><td>0.118615</td><td>5.04</td><td>8670.23</td><td>signal</td></tr><tr><td>8</td><td><span class='sell'>SELL</span></td><td>2024-09-25 20:00:00</td><td>63150.70</td><td>0.118615</td><td>5.81</td><td>9658.20</td><td>take-profit</td></tr><tr><td>9</td><td><span class='buy'>BUY</span></td><td>2024-10-01 16:00:00</td><td>61756.77</td><td>0.117132</td><td>5.61</td><td>9652.39</td><td>signal</td></tr><tr><td>10</td><td><span class='sell'>SELL</span></td><td>2024-10-01 20:00:00</td><td>60812.41</td><td>0.117132</td><td>5.52</td><td>9536.17</td><td>stop-loss</td></tr><tr><td>11</td><td><span class='buy'>BUY</span></td><td>2024-10-02 08:00:00</td><td>61162.28</td><td>0.116779</td><td>5.54</td><td>9530.65</td><td>signal</td></tr><tr><td>12</td><td><span class='sell'>SELL</span></td><td>2024-10-09 16:00:00</td><td>61037.47</td><td>0.116779</td><td>5.52</td><td>9510.53</td><td>trailing-stop</td></tr><tr><td>13</td><td><span class='buy'>BUY</span></td><td>2024-10-15 12:00:00</td><td>66022.16</td><td>0.107892</td><td>5.52</td><td>9505.01</td><td>signal</td></tr><tr><td>14</td><td><span class='sell'>SELL</span></td><td>2024-10-20 20:00:00</td><td>69035.90</td><td>0.107892</td><td>5.77</td><td>9824.64</td><td>take-profit</td></tr>
+            </table>
+        </div>
+    </body>
+    </html>
+    

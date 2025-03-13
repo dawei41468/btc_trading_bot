@@ -31,14 +31,14 @@ def execute_sell_trade(trade_number, active_trade, price, position, timestamp, p
     print(f"Trade {trade_number}: {reason.capitalize()} Exit at {timestamp}, Price={price:.2f}, "
           f"Profit={profit:.2f}, Portfolio Value={portfolio_value:.2f}")
     
-    return trade, cash_from_sale, 4 if profit < 0 else 2
+    return trade, cash_from_sale, 2 if profit < 0 else 2  # Changed to 2 candles always
 
 def execute_buy_trade(trade_number, signal, price, portfolio_value, cash, timestamp, regime):
     """Handle buying logic with volatility-adjusted sizing."""
-    if signal != 1 or cash < POSITION_SIZE_FRACTION * portfolio_value * 0.50:
+    if signal != 1 or cash < POSITION_SIZE_FRACTION * portfolio_value * 0.70:  # Updated minimum check
         return None, 0, cash
     
-    trade_value = POSITION_SIZE_FRACTION * portfolio_value if regime == 'trending' else 0.50 * portfolio_value
+    trade_value = POSITION_SIZE_FRACTION * portfolio_value if regime == 'trending' else 0.70 * portfolio_value  # Updated to 70%
     if cash < trade_value:
         return None, 0, cash
     

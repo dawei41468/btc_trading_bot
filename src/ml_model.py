@@ -3,18 +3,24 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_score, recall_score, f1_score, roc_auc_score
-from config import ML_FEATURES, ML_TEST_SIZE, ML_MAX_DEPTH, EARLY_STOPPING_ROUNDS
+from src.config import ML_FEATURES, ML_TEST_SIZE, ML_MAX_DEPTH, EARLY_STOPPING_ROUNDS
 import os
 
 class MLModel:
-    def __init__(self, model_path="xgboost_model.json"):
+    def __init__(self, model_path=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'models', 'xgboost_model.json')):
         """Initialize the ML model, loading from file if it exists."""
         self.model = None
         self.model_path = model_path
-        if os.path.exists(model_path):
-            self.model = xgb.Booster()  # Use Booster for xgb.train compatibility
-            self.model.load_model(model_path)
-            print(f"Loaded existing model from {model_path}")
+        if os.path.exists(self.model_path):
+            try:
+                self.model = xgb.Booster()
+                self.model.load_model(self.model_path)
+                print(f"Loaded existing model from {self.model_path}")
+            except Exception as e:
+                print(f"Error loading model from {self.model_path}: {e}")
+                self.model = None
+        else:
+            print(f"No model file found at {self.model_path}. Model must be trained first.")
 
     def train(self, df):
         """Train the XGBoost model to predict >1% price increases."""
@@ -48,7 +54,7 @@ class MLModel:
         # Define XGBoost parameters (tuned for 55.40% run)
         params = {
             'max_depth': ML_MAX_DEPTH,  # Tree depth (6) for complexity
-            'learning_rate': 0.002,  # Small learning rate for gradual training
+            'learning_rate': 0.002,  # Small learning rate for постепенное обучение
             'objective': 'binary:logistic',  # Binary classification objective
             'eval_metric': 'logloss',  # Evaluation metric
             'scale_pos_weight': scale_pos_weight,  # Base value for balanced precision/recall
@@ -92,15 +98,22 @@ class MLModel:
             print(f"  {feature}: {score:.4f}")
 
         # Save the trained model
+        os.makedirs(os.path.dirname(self.model_path), exist_ok=True)  # Ensure directory exists
         self.model.save_model(self.model_path)
         print(f"Model saved to {self.model_path}")
         return accuracy
 
     def predict(self, X):
         """Predict probabilities using the trained model."""
-        if self.model:
+        if self.model is None:
+            print("Warning: No trained model available for prediction. Returning zeros.")
             if not isinstance(X, xgb.DMatrix):
                 raise ValueError("Input must be an xgboost.DMatrix object")
+            return np.zeros(X.num_row())  # Return zeros array matching input size
+        if not isinstance(X, xgb.DMatrix):
+            raise ValueError("Input must be an xgboost.DMatrix object")
+        try:
             return self.model.predict(X)
-        print("Warning: No trained model available for prediction.")
-        return None
+        except Exception as e:
+            print(f"Prediction error: {e}. Returning zeros.")
+            return np.zeros(X.num_row())  # Fallback to zeros

@@ -6,6 +6,7 @@ from src.trade_utils import execute_sell_trade, execute_buy_trade
 from src.report_utils import generate_html_report
 from src.config import INITIAL_CAPITAL, ML_FEATURES, TRANSACTION_FEE_RATE, POSITION_SIZE_FRACTION, TRAILING_STOP_PERCENT
 import xgboost as xgb
+import os
 
 def calculate_metrics(df, trades, trend_metrics):
     """Calculate performance metrics from portfolio values and trades."""
@@ -49,7 +50,7 @@ def backtest(timeframe='4h'):
     model = MLModel()
     X = df[ML_FEATURES]
     df['pred_prob'] = model.predict(xgb.DMatrix(X))
-    df['signal'] = (df['pred_prob'] > 0.65).astype(int)
+    df['signal'] = (df['pred_prob'] > 0.65).astype(int)  # Reverted to 0.65
     df['trend_regime'] = (df['SMA50'] > df['SMA200']).astype(int)
 
     cash = INITIAL_CAPITAL
@@ -87,7 +88,7 @@ def backtest(timeframe='4h'):
             continue
 
         if position > 0 and active_trade:
-            stop_loss_multiplier = 0.75 if regime == 'choppy' else 1.0
+            stop_loss_multiplier = 0.5 if regime == 'choppy' else 1.0  # Changed to 0.5x ATR in choppy
             if price < active_trade['price'] - atr * stop_loss_multiplier:
                 trade, cash_gain, cooldown = execute_sell_trade(trade_number + 1, active_trade, price, position, timestamp, portfolio_value, 'stop-loss', trend_metrics)
                 trades.append(trade)
@@ -128,6 +129,8 @@ def backtest(timeframe='4h'):
     metrics = calculate_metrics(df, trades, trend_metrics)
     html_content = generate_html_report(timeframe, trades, metrics)
     
-    with open(f"backtest_report_{timeframe}.html", "w") as f:
+    report_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'reports', f"backtest_report_{timeframe}.html")
+    os.makedirs(os.path.dirname(report_path), exist_ok=True)
+    with open(report_path, "w") as f:
         f.write(html_content)
-    print(f"Backtest completed on {timeframe}. Open 'backtest_report_{timeframe}.html' in your browser to view the results.")
+    print(f"Backtest completed on {timeframe}. Open '{report_path}' in your browser to view the results.")

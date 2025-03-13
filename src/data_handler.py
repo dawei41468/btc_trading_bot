@@ -1,14 +1,18 @@
 import ccxt
 import pandas as pd
-from config import BYBIT_API_KEY, BYBIT_API_SECRET, SYMBOL
-import time
+from src.config import SYMBOL  # Import SYMBOL from src.config
 import os
+import time
+from dotenv import load_dotenv
+
+# Load environment variables from .env in the root directory (consistent with config.py)
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
 
 class DataHandler:
     def __init__(self):
         self.exchange = ccxt.bybit({
-            'apiKey': BYBIT_API_KEY,
-            'secret': BYBIT_API_SECRET,
+            'apiKey': os.environ.get('BYBIT_API_KEY'),
+            'secret': os.environ.get('BYBIT_API_SECRET'),
             'enableRateLimit': True
         })
 
@@ -43,7 +47,8 @@ class DataHandler:
         print("First few rows:")
         print(df.head())
 
-        filename = f"data_{SYMBOL.replace('/', '_')}_{timeframe}.csv"
+        filename = f"data/raw/data_{SYMBOL.replace('/', '_')}_{timeframe}.csv"  # Updated path
+        os.makedirs(os.path.dirname(filename), exist_ok=True)  # Ensure directory exists
         df.to_csv(filename, index=False)
         print(f"Saved {timeframe} data to {filename}")
         return df
@@ -51,9 +56,9 @@ class DataHandler:
     def load_historical_data(self, timeframe, period_name=None):
         """Load historical data from CSV if available, otherwise fetch it."""
         if period_name:
-            filename = f"data_{SYMBOL.replace('/', '_')}_{timeframe}_{period_name}.csv"
+            filename = f"data/processed/data_{SYMBOL.replace('/', '_')}_{timeframe}_{period_name}.csv"  # Updated path
         else:
-            filename = f"data_{SYMBOL.replace('/', '_')}_{timeframe}.csv"
+            filename = f"data/raw/data_{SYMBOL.replace('/', '_')}_{timeframe}.csv"  # Updated path
         if os.path.exists(filename):
             df = pd.read_csv(filename)
             df['timestamp'] = pd.to_datetime(df['timestamp'])
@@ -67,7 +72,7 @@ class DataHandler:
 
     def load_stress_data(self, timeframe, stress_type):
         """Load stress test data from CSV."""
-        filename = f"data_{SYMBOL.replace('/', '_')}_{timeframe}_stress_{stress_type}.csv"
+        filename = f"data/processed/data_{SYMBOL.replace('/', '_')}_{timeframe}_stress_{stress_type}.csv"  # Updated path
         if os.path.exists(filename):
             df = pd.read_csv(filename)
             df['timestamp'] = pd.to_datetime(df['timestamp'])
